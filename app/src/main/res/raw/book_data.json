@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1GeVjsZgWH8NntuWlLCn",
+    "title": "Stand-alone background hierarchy",
+    "description": "Porro quia aspernatur quia excepturi consequuntur quia exercitationem. Suscipit corporis corporis enim officia non perspiciatis. Veritatis iste rerum pariatur modi quam mollitia.",
+    "image": "https://picsum.photos/200/300",
+    "isbn": "9794256204657",
+    "publish_date": "2008-02-29",
+    "page_count": 190
+  },
+  {
+    "id": "8PnE0cT7i7dyz9Xlqxin",
+    "title": "Open-source incremental array",
+    "description": "Accusamus velit provident reiciendis. A veniam qui ut. Et ea eaque deleniti voluptatem quasi. Ex expedita ea aspernatur consequatur et sit nam.",
+    "image": "https://picsum.photos/200/300",
+    "isbn": "9786901869878",
+    "publish_date": "2006-08-27",
+    "page_count": 574
+  }
+]
