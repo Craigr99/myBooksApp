@@ -1,7 +1,13 @@
 package com.example.mybooksapp.ui.main
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import com.example.mybooksapp.data.BookRepository
 
-class MainViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class MainViewModel(app: Application) : AndroidViewModel(app) {
+
+    private val dataRepo = BookRepository(app)
+    val bookData = dataRepo.bookData
+
+
 }

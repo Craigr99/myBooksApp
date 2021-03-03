@@ -1,40 +1,43 @@
 package com.example.mybooksapp.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.mybooksapp.R
-import com.example.mybooksapp.data.Book
+import com.example.mybooksapp.databinding.MainFragmentBinding
 
 class MainFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private lateinit var viewModel: MainViewModel
+    private lateinit var binding: MainFragmentBinding
+//    private lateinit var adapter : BookListAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val book = Book(
-            "231232dffs", "Book 1", "description", "image.png", "123231232", "2020-03-01", 123
-        )
-        Log.i("bookLogging", book.toString())
-
-        return inflater.inflate(R.layout.main_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        binding = MainFragmentBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        viewModel.bookData?.observe(viewLifecycleOwner, Observer {
+
+            val bookNames = StringBuilder()
+            for (book in it) {
+                bookNames.append(book.title)
+                    .append("\n")
+            }
+            binding.title.text = bookNames
+        })
+
+
+//        return inflater.inflate(R.layout.main_fragment, container, false)
+        return binding.root
     }
+
 
 }
