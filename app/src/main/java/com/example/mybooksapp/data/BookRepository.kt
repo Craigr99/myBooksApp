@@ -14,7 +14,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class BookRepository(val app: Application) {
 
-    val bookData = MutableLiveData<List<Book>>()
+    val bookData = MutableLiveData<BooksResponse>()
 
 
     init {
@@ -31,7 +31,7 @@ class BookRepository(val app: Application) {
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
             val service = retrofit.create(BookService::class.java)
-            val serviceData = service.getBookData().body() ?: emptyList()
+            val serviceData = service.getBookData()
             bookData.postValue(serviceData)
         }
 
@@ -43,6 +43,10 @@ class BookRepository(val app: Application) {
                 as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo?.isConnectedOrConnecting ?: false
+    }
+
+    fun refreshData() {
+
     }
 
 }
