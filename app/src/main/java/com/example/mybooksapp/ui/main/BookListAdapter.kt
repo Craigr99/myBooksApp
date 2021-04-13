@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.mybooksapp.R
 import com.example.mybooksapp.data.Book
 import com.example.mybooksapp.databinding.BookItemBinding
@@ -36,9 +37,9 @@ class BookListAdapter(
             nameText.setText(book.title)
 //            authorText.setText(book.authors)
             yearText.setText(book.publish_date)
-//            Glide.with(context)
-//                .load(book.bookImage)
-//                .into(bookImage)
+            Glide.with(context)
+                .load(book.bookImage)
+                .into(bookImage)
 
             card.setOnClickListener {
                 itemListener.onBookItemClick(book)
