@@ -50,5 +50,6 @@ class BookListAdapter(
 
     interface BookItemListener {
         fun onBookItemClick(book: Book)
+        fun addBook()
     }
 }

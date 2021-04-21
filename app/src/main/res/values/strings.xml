@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">myBooks App</string>
+    <string name="app_name">myBooks</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mybooks">myBooks</string>
+    <string name="enter_book_name">enter_book_name</string>
+    <string name="search_book">Search Book</string>
+    <string name="add_book">Add Book</string>
+    <string name="search_for_a_book">Search for a book..</string>
+    <string name="search">Search</string>
 </resources>

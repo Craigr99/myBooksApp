@@ -1,24 +1,17 @@
-package com.example.mybooksapp.ui.detail
+package com.example.mybooksapp.ui.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.example.mybooksapp.LOG_TAG
 import com.example.mybooksapp.R
-import com.example.mybooksapp.databinding.FragmentDetailBinding
-import com.example.mybooksapp.ui.shared.SharedViewModel
 
-class DetailFragment : Fragment() {
-    private lateinit var viewModel: SharedViewModel
+class SearchFragment : Fragment() {
     private lateinit var navController: NavController
 
     override fun onCreateView(
@@ -40,20 +33,9 @@ class DetailFragment : Fragment() {
             requireActivity(), R.id.nav_host
         )
 
-        //init viewModel
-        viewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
-        // Set up observer
-        viewModel.selectedBook.observe(viewLifecycleOwner, Observer {
-            Log.i(LOG_TAG, "selecred book ${it.title}")
-        })
 
-        val binding = FragmentDetailBinding.inflate(
-            inflater, container, false
-        )
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-
-        return binding.root
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
 
@@ -64,6 +46,5 @@ class DetailFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 
 }
