@@ -3,6 +3,7 @@ package com.example.mybooksapp.data
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
+import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import com.example.mybooksapp.WEB_SERVICE_URL
@@ -20,6 +21,23 @@ class BookRepository(val app: Application) {
     init {
         CoroutineScope(Dispatchers.IO).launch {
             callWebService()
+        }
+    }
+
+    @WorkerThread
+    suspend fun searchBooks(searchQuery: String) {
+        if (networkAvailable()) {
+            // Create retrofit object, link moshi
+            val retrofit = Retrofit.Builder()
+                .baseUrl(WEB_SERVICE_URL)
+                .addConverterFactory(MoshiConverterFactory.create())
+                .build()
+
+            val service = retrofit.create(BookService::class.java)
+
+            val res = service.searchBooks(searchQuery)
+            bookData.postValue(res)
+            Log.i("HERE", bookData.toString())
         }
     }
 

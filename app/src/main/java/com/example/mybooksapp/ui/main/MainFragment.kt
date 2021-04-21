@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.example.mybooksapp.LOG_TAG
 import com.example.mybooksapp.R
 import com.example.mybooksapp.data.Book
@@ -22,6 +23,7 @@ class MainFragment : Fragment(),
     private lateinit var binding: MainFragmentBinding
     private lateinit var adapter: BookListAdapter
     private lateinit var navController: NavController
+    private val args: MainFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -45,10 +47,15 @@ class MainFragment : Fragment(),
             requireActivity(), R.id.nav_host
         )
 
+
         with(binding.recyclerView)
         {
             setHasFixedSize(true)
         }
+
+        // Get search query from params passed from search fragment
+        // TODO: FIX SEARCH
+        // viewModel.getBooks(args.searchQuery.toString())
 
         viewModel.bookData?.observe(viewLifecycleOwner, Observer {
             adapter = BookListAdapter(requireContext(), it.data, this)

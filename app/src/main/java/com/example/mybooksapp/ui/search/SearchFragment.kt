@@ -1,6 +1,7 @@
 package com.example.mybooksapp.ui.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -9,15 +10,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.mybooksapp.R
+import com.example.mybooksapp.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
     private lateinit var navController: NavController
+    private lateinit var binding: FragmentSearchBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
+
         //Get reference to activity that owns this fragment
         (activity as AppCompatActivity).supportActionBar?.let {
             // if supportActionBar not null
@@ -33,9 +40,17 @@ class SearchFragment : Fragment() {
             requireActivity(), R.id.nav_host
         )
 
+        // Click listener for search button
+        binding.searchButton.setOnClickListener {
+            Log.i("Search", binding.searchInput.text.toString())
+            val action =
+                SearchFragmentDirections.actionSearchFragmentToMainFragment(binding.searchInput.text.toString())
+            findNavController().navigate(action)
+        }
+
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        return binding.root
     }
 
 
