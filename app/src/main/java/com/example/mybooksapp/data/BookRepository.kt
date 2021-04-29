@@ -3,13 +3,14 @@ package com.example.mybooksapp.data
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
-import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import com.example.mybooksapp.WEB_SERVICE_URL
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -27,17 +28,23 @@ class BookRepository(val app: Application) {
     @WorkerThread
     suspend fun searchBooks(searchQuery: String) {
         if (networkAvailable()) {
+            val logging = HttpLoggingInterceptor()
+            logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
+            val httpClient = OkHttpClient.Builder()
+            httpClient.addInterceptor(logging)
+
+
             // Create retrofit object, link moshi
             val retrofit = Retrofit.Builder()
                 .baseUrl(WEB_SERVICE_URL)
                 .addConverterFactory(MoshiConverterFactory.create())
+                .client(httpClient.build())
                 .build()
 
             val service = retrofit.create(BookService::class.java)
 
             val res = service.searchBooks(searchQuery)
             bookData.postValue(res)
-            Log.i("HERE", bookData.toString())
         }
     }
 

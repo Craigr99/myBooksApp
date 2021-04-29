@@ -31,7 +31,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Book Title sdj gfofs djfojas dfjdsofj" />
+                tools:text="Book Title" />
 
             <TextView
                 android:id="@+id/dateText"
@@ -102,18 +102,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="Mingle excels at doing twice the work in half the time, with pinpoint accuracy.  These skills serve her well in her role as Senior Data Analyst for an international cloud computing company. She's also got a penchant for ballroom dance, line dancing, and pretty much any kind of activity that lets her groove to music." />
-
-            <!--        <RatingBar-->
-            <!--            android:id="@+id/ratingBar"-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            style="?android:attr/ratingBarStyle"-->
-            <!--            android:layout_marginTop="16dp"-->
-            <!--            android:isIndicator="true"-->
-            <!--            app:layout_constraintStart_toStartOf="parent"-->
-            <!--            app:layout_constraintEnd_toEndOf="parent"-->
-            <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--            tools:rating="3"/>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

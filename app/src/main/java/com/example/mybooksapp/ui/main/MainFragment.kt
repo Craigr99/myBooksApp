@@ -55,7 +55,8 @@ class MainFragment : Fragment(),
 
         // Get search query from params passed from search fragment
         // TODO: FIX SEARCH
-        // viewModel.getBooks(args.searchQuery.toString())
+        if (args.searchQuery.toString() != "-999")
+            viewModel.getBooks(args.searchQuery.toString())
 
         viewModel.bookData?.observe(viewLifecycleOwner, Observer {
             adapter = BookListAdapter(requireContext(), it.data, this)
@@ -66,6 +67,8 @@ class MainFragment : Fragment(),
         binding.fab.setOnClickListener {
             addBook()
         }
+
+
 
         return binding.root
     }

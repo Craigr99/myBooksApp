@@ -21,6 +21,7 @@
             app:destination="@id/searchFragment" />
         <argument
             android:name="searchQuery"
+            android:defaultValue="-999"
             app:argType="string" />
     </fragment>
     <fragment
@@ -40,7 +41,12 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment">
+            <argument
+                android:name="searchQuery"
+                android:defaultValue="-999"
+                app:argType="string" />
+        </action>
     </fragment>
 
 </navigation>
