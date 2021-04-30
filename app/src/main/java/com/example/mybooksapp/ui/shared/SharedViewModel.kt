@@ -24,4 +24,7 @@ class SharedViewModel(app: Application) : AndroidViewModel(app) {
 
     }
 
+    fun refreshData() {
+        dataRepo.refreshData()
+    }
 }

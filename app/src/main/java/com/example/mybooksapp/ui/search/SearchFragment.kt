@@ -1,11 +1,12 @@
 package com.example.mybooksapp.ui.search
 
+import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -42,10 +43,14 @@ class SearchFragment : Fragment() {
 
         // Click listener for search button
         binding.searchButton.setOnClickListener {
-            Log.i("Search", binding.searchInput.text.toString())
             val action =
                 SearchFragmentDirections.actionSearchFragmentToMainFragment(binding.searchInput.text.toString())
             findNavController().navigate(action)
+
+            // Hide keyboard
+            val imm =
+                requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
         }
 
 
@@ -56,10 +61,16 @@ class SearchFragment : Fragment() {
 
     // When item selected from options menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Hide keyboard
+        val imm =
+            requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view?.windowToken, 0)
+
         return when (item.itemId) {
             android.R.id.home -> navController.navigateUp()
             else -> super.onOptionsItemSelected(item)
         }
     }
+    
 
 }

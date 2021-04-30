@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.mybooksapp.LOG_TAG
 import com.example.mybooksapp.R
 import com.example.mybooksapp.data.Book
@@ -24,6 +25,7 @@ class MainFragment : Fragment(),
     private lateinit var adapter: BookListAdapter
     private lateinit var navController: NavController
     private val args: MainFragmentArgs by navArgs()
+    private lateinit var swipeLayout: SwipeRefreshLayout
 
 
     override fun onCreateView(
@@ -40,9 +42,13 @@ class MainFragment : Fragment(),
         // Set app name
         requireActivity().title = getString(R.string.app_name)
 
-
+        val view = inflater.inflate(R.layout.main_fragment, container, false)
         binding = MainFragmentBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        swipeLayout = view.findViewById(R.id.swipeLayout)
+        swipeLayout.setOnRefreshListener {
+            viewModel.refreshData()
+        }
         navController = Navigation.findNavController(
             requireActivity(), R.id.nav_host
         )
@@ -54,20 +60,21 @@ class MainFragment : Fragment(),
         }
 
         // Get search query from params passed from search fragment
-        // TODO: FIX SEARCH
         if (args.searchQuery.toString() != "-999")
             viewModel.getBooks(args.searchQuery.toString())
+
+
 
         viewModel.bookData?.observe(viewLifecycleOwner, Observer {
             adapter = BookListAdapter(requireContext(), it.data, this)
             binding.recyclerView.adapter = adapter
         })
+        swipeLayout.isRefreshing = false
 
         // Listener for FAB button
         binding.fab.setOnClickListener {
             addBook()
         }
-
 
 
         return binding.root

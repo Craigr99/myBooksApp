@@ -8,4 +8,5 @@
     <string name="add_book">Add Book</string>
     <string name="search_for_a_book">Search for a book..</string>
     <string name="search">Search</string>
+    <string name="view_all_books">View all Books</string>
 </resources>

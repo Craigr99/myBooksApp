@@ -1,10 +1,12 @@
 package com.example.mybooksapp.ui.form
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -48,12 +50,22 @@ class AddFragment : Fragment() {
     }
 
     private fun saveBook() {
+        // Hide keyboard
+        val imm =
+            requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view?.windowToken, 0)
+
         navController.navigateUp()
     }
 
 
     // Handle click on back button
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Hide keyboard
+        val imm =
+            requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view?.windowToken, 0)
+
         if (item.itemId == android.R.id.home) {
             navController.navigateUp()
         }

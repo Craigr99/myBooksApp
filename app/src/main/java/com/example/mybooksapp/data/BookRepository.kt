@@ -20,9 +20,7 @@ class BookRepository(val app: Application) {
 
 
     init {
-        CoroutineScope(Dispatchers.IO).launch {
-            callWebService()
-        }
+        refreshData()
     }
 
     @WorkerThread
@@ -71,7 +69,9 @@ class BookRepository(val app: Application) {
     }
 
     fun refreshData() {
-
+        CoroutineScope(Dispatchers.IO).launch {
+            callWebService()
+        }
     }
 
 }
